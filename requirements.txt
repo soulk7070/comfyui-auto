@@ -1,5 +1,2 @@
-
 requests>=2.31.0
 websocket-client>=1.6.0
-pathlib>=1.0.1
-logging>=0.4.9.6
