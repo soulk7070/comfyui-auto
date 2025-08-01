@@ -1,0 +1,142 @@
+{
+  "8": {
+    "inputs": {
+      "samples": [
+        "31",
+        0
+      ],
+      "vae": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "27": {
+    "inputs": {
+      "width": 1344,
+      "height": 768,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  },
+  "31": {
+    "inputs": {
+      "seed": 926190210024609,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "52",
+        0
+      ],
+      "positive": [
+        "45",
+        0
+      ],
+      "negative": [
+        "42",
+        0
+      ],
+      "latent_image": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "39": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "40": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIPLoader"
+    }
+  },
+  "42": {
+    "inputs": {
+      "conditioning": [
+        "45",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "ConditioningZeroOut"
+    }
+  },
+  "45": {
+    "inputs": {
+      "text": "Photo featuring a couple, same-sex or opposite-sex, mid-action in a warm-toned kitchen, playfully baking cinnamon rolls together on a sunlit morning. One partner gently dabs flour on the other’s nose, prompting a burst of genuine laughter, while their hands remain messy with dough. They wear rolled-up flannel shirts and soft cotton tees with fabric aprons, appearing slightly disheveled from their activity. Captured in bright diffused natural light streaming from a kitchen window using a Canon EOS R with a 50mm f/1.8 lens. Conceptual Elements & Uniqueness: Emphasis on kinetic emotion and shared creation — not the finished food. The image conveys togetherness through tactile elements: fingers pressing dough, powder flying, cinnamon dust on wood. Dominant colors include warm creams, browns, and hints of red flannel. Set the aperture to f/1.8 to softly blur the kitchen backdrop while highlighting joyful faces and hands in motion. Frame using eye-level medium shots with leading lines from counters and utensils pointing toward the couple. Complement with detail shots using 85mm f/1.8 to capture textures of dough, cinnamon sprinkle, and flour-covered fingers. Adjust shutter speed to 1/320s to freeze candid laughter, and apply white balance in warm tone to reinforce morning coziness. Add visual depth through soft reflections on ceramic bowls, slight lens flare from side light, and background elements like scattered apples or mini pumpkins to evoke seasonal comfort",
+      "clip": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "52": {
+    "inputs": {
+      "unet_name": "flux1-krea-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "53": {
+    "inputs": {
+      "output_path": "[time(%Y-%m-%d)]",
+      "filename_prefix": "lora1",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "filename_number_start": "false",
+      "extension": "jpg",
+      "dpi": 300,
+      "quality": 100,
+      "optimize_image": "true",
+      "lossless_webp": "false",
+      "overwrite_mode": "false",
+      "show_history": "false",
+      "show_history_by_prefix": "true",
+      "embed_workflow": "true",
+      "show_previews": "true",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "Image Save",
+    "_meta": {
+      "title": "Image Save"
+    }
+  }
+}
