@@ -1,0 +1,153 @@
+{
+  "6": {
+    "inputs": {
+      "text": "Photo featuring a young British woman with an urban minimalist look cycling along a tree-lined urban path, her front bike basket overflowing with fresh harvest—plums, bell peppers, and kale. She wears an earth-tone transitional jacket, high-waisted cotton pants, and sustainable sneakers. Her expression is focused yet upbeat as she pedals forward. Captured during golden hour with soft natural light wrapping around the subject and produce, creating a gentle rim glow. Shot using a Fujifilm X-T5 and 35mm f/1.4 lens with a dynamic panning technique to convey motion while keeping her in sharp focus. Conceptual Elements & Uniqueness: this image combines urban mobility and sustainable living in a fresh way—celebrating local harvest not from the garden, but in motion through the city. Muted wardrobe tones contrast with the vivid colors of produce. Set the aperture to f/2.0 to emphasize the subject and create elegant background motion blur. Compose using rule of thirds and leading lines from the bike path for direction and flow. Adjust shutter speed to 1/100s to preserve natural motion blur in the environment. Use warm white balance to highlight late-day glow. Add visual depth through layered shadows from surrounding trees, soft reflector fill on the model’s face, and delicate sunlight catching on the textures of kale leaves and woven basket ,hand ",
+      "clip": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "FluxGuidance"
+    }
+  },
+  "26": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF",
+    "_meta": {
+      "title": "DualCLIPLoader (GGUF)"
+    }
+  },
+  "27": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "162": {
+    "inputs": {
+      "width": 1600,
+      "height": 896,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  },
+  "163": {
+    "inputs": {
+      "seed": 613350665042666,
+      "steps": 30,
+      "cfg": 1,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "192",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "162",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "164": {
+    "inputs": {
+      "samples": [
+        "163",
+        0
+      ],
+      "vae": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "168": {
+    "inputs": {
+      "anything": [
+        "164",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean VRAM Used"
+    }
+  },
+  "192": {
+    "inputs": {
+      "unet_name": "fluxmania_legacy.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "195": {
+    "inputs": {
+      "filename_prefix": "fluxmaniaL",
+      "images": [
+        "164",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}
